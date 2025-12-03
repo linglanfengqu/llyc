@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>六爻在线占卜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&family=Cinzel:wght@400;600&display=swap');
+      
+      body {
+        font-family: 'Noto Serif SC', serif;
+        background-color: #f5f5f4; /* stone-100 */
+      }
+      
+      .ink-brush {
+        filter: url('#ink-filter');
+      }
+
+      @keyframes slide-up-fade {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-slide-up-fade {
+        animation-name: slide-up-fade;
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+        animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      @keyframes stamp-in {
+        0% {
+          opacity: 0;
+          transform: scale(2);
+          filter: blur(2px);
+        }
+        60% {
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+          filter: blur(0);
+        }
+      }
+
+      .animate-stamp-in {
+        animation-name: stamp-in;
+        animation-duration: 0.5s;
+        animation-fill-mode: both; /* Keeps initial state (hidden) before animation starts */
+        animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy effect */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <!-- SVG Filter for Ink Effect -->
+    <svg style="display: none;">
+      <defs>
+        <filter id="ink-filter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+        </filter>
+      </defs>
+    </svg>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
